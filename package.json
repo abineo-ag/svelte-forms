@@ -1,0 +1,26 @@
+{
+	"name": "@rokkett/svelte-forms",
+	"version": "0.1.0",
+	"description": "Form validation for svelte & sveltekit (js/ts)",
+	"author": "Christoph Schneider",
+	"license": "ISC",
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@gitlab.com/rokkett/svelte-forms.git"
+	},
+	"homepage": "https://gitlab.com/rokkett/svelte-forms#readme",
+	"keywords": [
+		"form",
+		"validation",
+		"svelte",
+		"sveltekit"
+	],
+	"bugs": {
+		"url": "https://gitlab.com/rokkett/svelte-forms/-/issues"
+	},
+	"scripts": {},
+	"peerDependencies": {
+		"svelte": "^3.x",
+		"typescript": "^4.x"
+	}
+}

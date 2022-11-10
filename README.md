@@ -14,17 +14,16 @@ npm install @rokkett/svelte-forms
 ## Usage
 
 ```ts
-// field(<name>, <default value>, <validators>, <options>)
-const mail = field("email", "", [required(), email()]);
-const pass = field("password", "", [required(), min(8)]);
-const name = field("username", "", [not(eq("notch"))], { optional: true });
-const gender = field("gender", "", [], { optional: true });
+const mail = field('email', [required(), email()]);
+const pass = field('password', [required(), min(8)]);
+const name = field('username', [not(eq('steve'))], { optional: true });
+const gender = field('gender', [], { optional: true, value: 'human' });
 
-// form(<field>, ...)
 const userForm = form(mail, pass, name, gender);
 
 function onSubmit() {
-    console.log(get(userForm).data);
+    const uf = get(userForm);
+    console.log(uf.data, uf.errors, uf.valid);
 }
 ```
 
@@ -41,7 +40,8 @@ function onSubmit() {
 
 ## Contributing
 
-If you think you found a bug: [open a issue](https://gitlab.com/rokkett/svelte-forms/-/issues). Feature request are also welcome.
+If you think you found a bug: [open a issue](https://gitlab.com/rokkett/svelte-forms/-/issues).
+Feature request are also welcome.
 
 ## License
 

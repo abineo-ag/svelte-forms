@@ -1,10 +1,10 @@
-import { derived, get, type Readable } from 'svelte/store';
-import type { Field } from './field';
+import { derived, get, type Readable } from "svelte/store";
+import type { Field } from "./field";
 
 export interface Form {
 	valid: boolean;
 	dirty: boolean;
-	errors: string[];
+	errors: object;
 	data: object;
 }
 
@@ -13,17 +13,17 @@ export function form(...fields: Field<any>[]): Readable<Form> & {
 	revalidate: (dirty?: boolean) => void;
 } {
 	const store = derived(fields, ([_]) => {
+		const _fields = fields.map((field) => get(field));
 		const data = {};
-		fields
-			.map((field) => get(field))
-			.forEach((field) => {
-				// @ts-ignore // error: ts(7053)
-				data[field.name] = field.value;
-			});
+		const errors = {};
+		_fields.forEach((field) => {
+			data[field.name] = field.value;
+			errors[field.name] = field.errors;
+		});
 		return {
-			valid: fields.every((field) => get(field).valid),
-			dirty: fields.some((field) => get(field).dirty),
-			errors: fields.map((field) => get(field).errors).flat(),
+			valid: _fields.every((field) => field.valid),
+			dirty: _fields.some((field) => field.dirty),
+			errors,
 			data,
 		};
 	});

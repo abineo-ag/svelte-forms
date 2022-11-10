@@ -22,15 +22,17 @@ export type Field<T> = Omit<Writable<FieldState<T>>, 'set' | 'update'> & {
 };
 
 export interface FieldOptions {
+	value: any;
 	optional: boolean;
 }
 
 const defaultFieldOptions = {
+	value: null,
 	optional: false,
 };
 
 function getNewState<T>(
-	state: Omit<FieldState<T>, 'errors' | 'valid'>,
+	state: Omit<FieldState<T>, "errors" | "valid">,
 	validators: Validator[],
 	options: FieldOptions
 ): FieldState<T> {
@@ -39,18 +41,21 @@ function getNewState<T>(
 	return {
 		...state,
 		errors: getErrors(results),
-		valid: allValid || (options.optional && (state.value === '' || state.value === 0)),
+		valid:
+			allValid ||
+			(options.optional && (state.value === "" || state.value === 0)),
 	};
 }
 
 export function field<T>(
 	name: string,
-	value: T,
 	validators: Validator[] = [],
 	options: Partial<FieldOptions> = {}
 ): Field<T> {
 	const opts: FieldOptions = { ...defaultFieldOptions, ...options };
-	const store = writable(getNewState({ name, value, dirty: false }, validators, opts));
+	const store = writable(
+		getNewState({ name, value: opts.value, dirty: false }, validators, opts)
+	);
 
 	return {
 		subscribe: store.subscribe,
@@ -64,14 +69,26 @@ export function field<T>(
 			if (isFieldState(state)) {
 				store.set(getNewState({ ...state, dirty }, validators, opts));
 			} else {
-				store.set(getNewState({ ...get(store), value: <T>state, dirty }, validators, opts));
+				store.set(
+					getNewState(
+						{ ...get(store), value: <T>state, dirty },
+						validators,
+						opts
+					)
+				);
 			}
 		},
 		setValid: (valid: boolean, dirty: boolean = true) => {
 			store.set({ ...get(store), valid, dirty });
 		},
 		reset: () => {
-			store.set(getNewState({ ...get(store), value, dirty: false }, validators, opts));
+			store.set(
+				getNewState(
+					{ ...get(store), value: opts.value, dirty: false },
+					validators,
+					opts
+				)
+			);
 		},
 		revalidate: (dirty?: boolean) => {
 			const state = get(store);

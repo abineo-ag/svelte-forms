@@ -1,12 +1,13 @@
 import { get } from 'svelte/store';
 import type { Field } from './field';
+import { isEqual } from 'lodash';
 
 class ValidationResult {
 	type: string;
 	valid: boolean;
 	inner: ValidationResult[];
 
-	constructor(type: string, valid: boolean, inner: ValidationResult[] = []) {
+	constructor(type: string, valid: boolean, inner: ValidationResult[]) {
 		this.type = type;
 		this.valid = valid;
 		this.inner = inner;
@@ -27,7 +28,7 @@ export enum ValidationType {
 	All = 'all',
 	Any = 'any',
 	None = 'none',
-	Xor = 'xor',
+	Either = 'either',
 	Required = 'required',
 	Min = 'min',
 	Max = 'max',
@@ -70,7 +71,8 @@ export function required(error: string = ValidationType.Required): Validator {
 	return (value: any) => {
 		if (
 			(typeof value === 'boolean' && value) ||
-			typeof value === 'object' ||
+			(Array.isArray(value) && value.length !== 0) ||
+			(typeof value === 'object' && value && !Array.isArray(value)) ||
 			getSize(value) !== 0
 		)
 			return ok(error);
@@ -112,14 +114,14 @@ export function size(size: number, error: string = ValidationType.Size): Validat
 
 export function eq(wanted: any, error: string = ValidationType.Equal): Validator {
 	return (value: any) => {
-		if (value === wanted) return ok(error);
+		if (isEqual(value, wanted)) return ok(error);
 		return err(error);
 	};
 }
 
 export function eqField(field: Field<any>, error: string = ValidationType.Equal): Validator {
 	return (value: any) => {
-		if (get(field).value === value) return ok(error);
+		if (isEqual(get(field).value, value)) return ok(error);
 		return err(error);
 	};
 }
@@ -164,17 +166,17 @@ export function any(...validators: Validator[]): Validator {
 export function none(...validators: Validator[]): Validator {
 	return (value: any) => {
 		const results = validateAll(value, ...validators);
-		const allValid = results.every((result) => result.valid);
-		return allValid ? err(ValidationType.None, results) : ok(ValidationType.None, results);
+		const valid = results.some((result) => result.valid);
+		return valid ? err(ValidationType.None, results) : ok(ValidationType.None, results);
 	};
 }
 
 export function either(validatorA: Validator, validatorB: Validator): Validator {
 	return (value: any) => {
 		const results = validateAll(value, validatorA, validatorB);
-		const count = results.map((result) => [result.valid] || []).flat();
+		const count = results.map((result) => result.valid || []).flat();
 		return count.length === 1
-			? ok(ValidationType.Xor, results)
-			: err(ValidationType.Xor, results);
+			? ok(ValidationType.Either, results)
+			: err(ValidationType.Either, results);
 	};
 }

@@ -8,7 +8,7 @@
 		"type": "git",
 		"url": "git+ssh://git@gitlab.com/rokkett/svelte-forms.git"
 	},
-	"homepage": "https://gitlab.com/rokkett/svelte-forms#readme",
+	"homepage": "https://gitlab.com/rokkett/svelte-forms/-/blob/main/README.md",
 	"keywords": [
 		"form",
 		"validation",

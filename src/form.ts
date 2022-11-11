@@ -1,5 +1,5 @@
-import { derived, get, type Readable } from "svelte/store";
-import type { Field } from "./field";
+import { derived, get, type Readable } from 'svelte/store';
+import type { Field } from './field';
 
 export interface Form {
 	valid: boolean;

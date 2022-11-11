@@ -1,4 +1,6 @@
-examples
 node_modules
+coverage
+examples
+tests
 *.md
 *.json

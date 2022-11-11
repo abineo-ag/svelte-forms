@@ -1,5 +1,8 @@
 # Svelte Forms
 
+[![Status](https://gitlab.com/rokkett/svelte-forms/badges/main/pipeline.svg?ignore_skipped=true&key_text=tests&key_width=40)](https://gitlab.com/rokkett/svelte-forms/-/pipelines)
+[![Coverage](https://gitlab.com/rokkett/svelte-forms/badges/main/coverage.svg)](https://gitlab.com/rokkett/svelte-forms/-/pipelines)
+
 Form validation for Svelte and Sveltekit. Support for Javascript and Typescript.
 
 - [Documentation](DOCS.md)

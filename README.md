@@ -21,8 +21,9 @@ const mail = field('email', [required(), email()]);
 const pass = field('password', [required(), min(8)]);
 const name = field('username', [not(eq('steve'))], { optional: true });
 const gender = field('gender', [], { optional: true, value: 'human' });
+const country = field('country', [(value) => value === 'switzerland' ? err('too rich!' : ok())]);
 
-const userForm = form(mail, pass, name, gender);
+const userForm = form(mail, pass, name, gender, country);
 
 function onSubmit() {
     const uf = get(userForm);
@@ -37,6 +38,7 @@ function onSubmit() {
         name={$field.name}
         use:fieldState={{ field: mail, invalid: 'border-red-500' }}
     />
+    ...
     <button type="submit" disabled={!$userForm.valid}>Submit</button>
 </form>
 ```

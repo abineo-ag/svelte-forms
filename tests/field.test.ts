@@ -1,4 +1,4 @@
-import { field, err, min } from '../src';
+import { field, err, min, not } from '../src';
 import { get } from 'svelte/store';
 
 describe('field', () => {
@@ -83,9 +83,16 @@ describe('field', () => {
 		expect(get(sut).dirty).toEqual(false);
 	});
 
-	it('omits errors passed to validator', () => {
+	it('returns errors passed to validator', () => {
 		const error = 'test';
 		const sut = field('sut', [() => err(error)]);
+
+		expect(get(sut).errors).toStrictEqual([error]);
+	});
+
+	it('returns errors as flat array', () => {
+		const error = 'notch';
+		const sut = field('sut', [not(not(() => err(error)))]);
 
 		expect(get(sut).errors).toStrictEqual([error]);
 	});

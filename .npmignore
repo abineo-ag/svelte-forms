@@ -4,3 +4,4 @@ examples
 tests
 *.md
 *.json
+*.yml

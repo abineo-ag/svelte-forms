@@ -32,7 +32,7 @@ const defaultFieldOptions = {
 };
 
 function getNewState<T>(
-	state: Omit<FieldState<T>, "errors" | "valid">,
+	state: Omit<FieldState<T>, 'errors' | 'valid'>,
 	validators: Validator[],
 	options: FieldOptions
 ): FieldState<T> {
@@ -41,9 +41,7 @@ function getNewState<T>(
 	return {
 		...state,
 		errors: getErrors(results),
-		valid:
-			allValid ||
-			(options.optional && (state.value === "" || state.value === 0)),
+		valid: allValid || (options.optional && (state.value === '' || !state.value)),
 	};
 }
 
@@ -69,31 +67,21 @@ export function field<T>(
 			if (isFieldState(state)) {
 				store.set(getNewState({ ...state, dirty }, validators, opts));
 			} else {
-				store.set(
-					getNewState(
-						{ ...get(store), value: <T>state, dirty },
-						validators,
-						opts
-					)
-				);
+				store.set(getNewState({ ...get(store), value: <T>state, dirty }, validators, opts));
 			}
 		},
-		setValid: (valid: boolean, dirty: boolean = true) => {
-			store.set({ ...get(store), valid, dirty });
+		setValid: (valid: boolean, dirty?: boolean) => {
+			const state = get(store);
+			store.set({ ...state, valid, dirty: dirty || state.dirty });
 		},
 		reset: () => {
 			store.set(
-				getNewState(
-					{ ...get(store), value: opts.value, dirty: false },
-					validators,
-					opts
-				)
+				getNewState({ ...get(store), value: opts.value, dirty: false }, validators, opts)
 			);
 		},
 		revalidate: (dirty?: boolean) => {
 			const state = get(store);
-			if (dirty === true || dirty === false) state.dirty = dirty;
-			store.set(getNewState({ ...state }, validators, opts));
+			store.set(getNewState({ ...state, dirty: dirty || state.dirty }, validators, opts));
 		},
 	};
 }

@@ -18,9 +18,18 @@
 	"bugs": {
 		"url": "https://gitlab.com/rokkett/svelte-forms/-/issues"
 	},
-	"scripts": {},
+	"scripts": {
+		"build": "tsc"
+	},
 	"peerDependencies": {
 		"svelte": "^3.x",
 		"typescript": "^4.x"
-	}
+	},
+	"type": "module",
+	"files": [
+		"dist"
+	],
+	"main": "dist/index.js",
+	"module": "dist/index.js",
+	"types": "dist/index.d.ts"
 }

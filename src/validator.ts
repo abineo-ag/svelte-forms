@@ -212,7 +212,7 @@ export function either(
 ): Validator {
 	return (value: any) => {
 		const results = validateAll(value, validatorA, validatorB);
-		const count = results.map((result) => result.valid || []).flat();
+		const count = results.map((result) => [result.valid] || []).flat();
 		return count.length === 1
 			? ok(ValidationType.Xor, results)
 			: err(ValidationType.Xor, results);

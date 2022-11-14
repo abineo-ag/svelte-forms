@@ -11,9 +11,9 @@ const myField = field('foo');
 Fields are [Svelte Stores](https://svelte.dev/docs#run-time-svelte-store) which you can subscribe to.
 
 ```html
-<input bind:value={$myField.value} name={$myField.name} />
+<input bind:value="{$myField.value}" name="{$myField.name}" />
 {#if !$myField.valid && $myField.dirty}
-    <sub>{$myField.errors.join()}</sub>
+<sub>{$myField.errors.join()}</sub>
 {/if}
 ```
 
@@ -24,9 +24,10 @@ You can change the value of a field, or reset the field to the initial value (de
 import { field, required, min } from '@rokkett/svelte-forms';
 import { get } from 'svelte/store';
 
-const myField = field('foo',
-    [required(), min(20)], // <- validators
-    { optional: true, value: 42 } // <- options
+const myField = field(
+	'foo',
+	[required(), min(20)], // <- validators
+	{ optional: true, value: 42 } // <- options
 );
 
 myField.set(5);
@@ -37,22 +38,22 @@ console.log(get(myField).value, get(myField).valid);
 myField.reset();
 
 console.log({
-    value: get(myField).value,
-    dirty: get(myField).dirty,
-    valid: get(myField).valid
+	value: get(myField).value,
+	dirty: get(myField).dirty,
+	valid: get(myField).valid,
 });
 // { value: 42, dirty: true, valid: true }
 
 myField.setValid(false);
 
-console.log(get(myField).valid)
+console.log(get(myField).valid);
 // false
 
 myField.revalidate(/* dirty?: boolean */ false);
 
 console.log({
-    dirty: get(myField).dirty,
-    valid: get(myField).valid
+	dirty: get(myField).dirty,
+	valid: get(myField).valid,
 });
 // { dirty: false, valid: true }
 ```
@@ -64,23 +65,23 @@ Every Validator can take a optional error string, which will be added to the fie
 There are plenty of default validators to pick from:
 
 ```ts
-function required(error?: string)
+function required(error?: string);
 
-function min(minimum: number, error?: string)
+function min(minimum: number, error?: string);
 
-function max(maximum: number, error?: string)
+function max(maximum: number, error?: string);
 
-function range(minimum: number, maximum: number, error?: string)
+function range(minimum: number, maximum: number, error?: string);
 
-function size(size: number, error?: string)
+function size(size: number, error?: string);
 
-function eq(wanted: any, error?: string)
+function eq(wanted: any, error?: string);
 
-function eqField(field: Field<any>, error?: string)
+function eqField(field: Field<any>, error?: string);
 
-function email(error?: string)
+function email(error?: string);
 
-function regex(regex: RegExp, error?: string)
+function regex(regex: RegExp, error?: string);
 ```
 
 All validators are connected as a logical `AND` gate. Example:
@@ -133,9 +134,9 @@ You can create custom validators, for more complex scenarios.
 
 ```ts
 const myValidator = (value: any) => {
-    if(value === 'foo') return err('foo-err-type');
-    else if (value === null) return err('no-null-err-type');
-    else return ok();
+	if (value === 'foo') return err('foo-err-type');
+	else if (value === null) return err('no-null-err-type');
+	else return ok();
 };
 const f = field('phield', [myValidator, required()]);
 
@@ -174,7 +175,7 @@ console.log(get(f).data);
 ```
 
 ```html
-<button disabled={!$f.valid} type="submit">Login</button>
+<button disabled="{!$f.valid}" type="submit">Login</button>
 ```
 
 # Classes / Styling
@@ -190,3 +191,11 @@ const foo = field('foo');
 ```html
 <input use:fieldState="{{ field: foo, invalid: 'border-red' }}" />
 ```
+
+The following classes are set by the action:
+
+-   valid
+-   invalid
+-   dirty
+
+You can change them by passing in custom class names, as seen in the example above.

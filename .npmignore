@@ -5,3 +5,4 @@ tests
 *.md
 *.json
 *.yml
+*.cjs

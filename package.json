@@ -1,6 +1,6 @@
 {
 	"name": "@rokkett/svelte-forms",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Form validation for svelte & sveltekit (js/ts)",
 	"author": "Christoph Schneider",
 	"license": "ISC",

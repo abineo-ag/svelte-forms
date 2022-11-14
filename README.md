@@ -6,7 +6,6 @@
 Form validation for Svelte and Sveltekit. Support for Javascript and Typescript.
 
 - [Documentation](DOCS.md)
-- [Examples](examples/README.md)
 
 ## Installation
 

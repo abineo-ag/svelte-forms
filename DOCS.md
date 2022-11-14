@@ -190,7 +190,3 @@ const foo = field('foo');
 ```html
 <input use:fieldState="{{ field: foo, invalid: 'border-red' }}" />
 ```
-
-# Examples
-
-See [examples](examples/README.md).

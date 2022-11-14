@@ -115,7 +115,7 @@ function none(...validators: Validator[]) => Validator;
 // is valid if all validators are INvalid
 
 function either(validatorA: Validator, validatorB: Validator) => Validator;
-//either is valid if exactly one validator is valid.
+// either is valid if exactly one validator is valid.
 ```
 
 You can put validators inside other validators or gates:

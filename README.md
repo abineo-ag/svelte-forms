@@ -1,11 +1,15 @@
 # Svelte Forms
 
-[![Status](https://gitlab.com/rokkett/svelte-forms/badges/main/pipeline.svg?ignore_skipped=true&key_text=tests&key_width=40)](https://gitlab.com/rokkett/svelte-forms/-/pipelines)
-[![Coverage](https://gitlab.com/rokkett/svelte-forms/badges/main/coverage.svg)](https://gitlab.com/rokkett/svelte-forms/-/pipelines)
+![Status](https://gitlab.com/rokkett/svelte-forms/badges/main/pipeline.svg?ignore_skipped=true&key_text=tests&key_width=40)
+![Coverage](https://gitlab.com/rokkett/svelte-forms/badges/main/coverage.svg)
+![Stable](https://img.shields.io/badge/status-stable-informational)
+[![npm](https://img.shields.io/npm/v/@rokkett/svelte-forms)](https://www.npmjs.com/package/@rokkett/svelte-forms)
 
 Form validation for Svelte and Sveltekit. Support for Javascript and Typescript.
 
 - [Documentation](https://gitlab.com/rokkett/svelte-forms/-/blob/main/DOCS.md)
+-   [NPM](https://www.npmjs.com/package/@rokkett/svelte-forms)
+-   [GitLab](https://gitlab.com/rokkett/svelte-forms)
 
 ## Installation
 

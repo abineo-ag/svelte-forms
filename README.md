@@ -3,7 +3,7 @@
 ![Status](https://gitlab.com/rokkett/svelte-forms/badges/main/pipeline.svg?ignore_skipped=true&key_text=tests&key_width=40)
 ![Coverage](https://gitlab.com/rokkett/svelte-forms/badges/main/coverage.svg)
 ![Stable](https://img.shields.io/badge/status-stable-informational)
-[![npm](https://img.shields.io/npm/v/@rokkett/svelte-forms)](https://www.npmjs.com/package/@rokkett/svelte-forms)
+![npm](https://img.shields.io/npm/v/@rokkett/svelte-forms)
 
 Form validation for Svelte and Sveltekit. Support for Javascript and Typescript.
 

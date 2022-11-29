@@ -41,3 +41,27 @@ export function form<U extends Field<any>[]>(
 		},
 	};
 }
+
+/* interface Item<T> {
+	name: string;
+	value: T;
+}
+
+function all<T extends Item<unknown>[]>(
+	...items: T
+): { [k in T[number]['name']]: T[number]['value'] } {
+	let data = {};
+	items.forEach((item) => (data[item.name] = item.value));
+	return <{ [k in T[number]['name']]: T[number]['value'] }>data;
+}
+
+const age: Item<number> = { name: 'age', value: 30 };
+const sex: Item<string> = { name: 'sex', value: 'men' };
+
+const data = all(age, sex);
+// { age: 30, sex: 'men' }
+
+data.age; // number | string
+data.sex; // number | string
+
+const data: { age: number; sex: string } = all(age, sex); */

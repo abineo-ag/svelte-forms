@@ -1,14 +1,18 @@
 import { derived, get, type Readable } from 'svelte/store';
 import type { Field } from './field';
 
-export interface Form {
+export interface Form<T> {
 	valid: boolean;
 	dirty: boolean;
 	errors: object;
-	data: object; // FIXME: i need a proper type
+	data: any; // FIXME
 }
 
-export function form(...fields: Field<any>[]): Readable<Form> & {
+// type At<T extends any[], I extends number> = T extends Record<I, infer U> ? U : any;
+
+export function form<U extends Field<any>[]>(
+	...fields: U
+): Readable<Form<U[number]>> & {
 	reset: () => void;
 	revalidate: (dirty?: boolean) => void;
 } {

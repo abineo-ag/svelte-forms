@@ -5,7 +5,7 @@ export interface Form {
 	valid: boolean;
 	dirty: boolean;
 	errors: object;
-	data: object;
+	data: object; // FIXME: i need a proper type
 }
 
 export function form(...fields: Field<any>[]): Readable<Form> & {

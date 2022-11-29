@@ -1,20 +1,20 @@
 # Svelte Forms
 
-![Status](https://gitlab.com/rokkett/svelte-forms/badges/main/pipeline.svg?ignore_skipped=true&key_text=tests&key_width=40)
-![Coverage](https://gitlab.com/rokkett/svelte-forms/badges/main/coverage.svg)
+![Status](https://gitlab.com/abineo/svelte-forms/badges/main/pipeline.svg?ignore_skipped=true&key_text=tests&key_width=40)
+![Coverage](https://gitlab.com/abineo/svelte-forms/badges/main/coverage.svg)
 ![Stable](https://img.shields.io/badge/status-stable-informational)
-![npm](https://img.shields.io/npm/v/@rokkett/svelte-forms)
+![npm](https://img.shields.io/npm/v/@abineo/svelte-forms)
 
 Form validation for Svelte and Sveltekit. Support for Javascript and Typescript.
 
-- [Documentation](https://gitlab.com/rokkett/svelte-forms/-/blob/main/DOCS.md)
--   [NPM](https://www.npmjs.com/package/@rokkett/svelte-forms)
--   [GitLab](https://gitlab.com/rokkett/svelte-forms)
+-   [Documentation](https://gitlab.com/abineo/svelte-forms/-/blob/main/DOCS.md)
+-   [NPM](https://www.npmjs.com/package/@abineo/svelte-forms)
+-   [GitLab](https://gitlab.com/abineo/svelte-forms)
 
 ## Installation
 
 ```sh
-npm install @rokkett/svelte-forms
+npm install @abineo/svelte-forms
 ```
 
 ## Usage
@@ -35,20 +35,20 @@ function onSubmit() {
 ```
 
 ```html
-<form on:submit|preventDefault={onSubmit}>
-    <input
+<form on:submit|preventDefault="{onSubmit}">
+	<input
         bind:value={$mail.value}
         name={$field.name}
         use:fieldState={{ field: mail, invalid: 'border-red-500' }}
     />
     ...
-    <button type="submit" disabled={!$userForm.valid}>Submit</button>
+	<button type="submit" disabled="{!$userForm.valid}">Submit</button>
 </form>
 ```
 
 ## Contributing
 
-If you think you found a bug: [open a issue](https://gitlab.com/rokkett/svelte-forms/-/issues).
+If you think you found a bug: [open a issue](https://gitlab.com/abineo/svelte-forms/-/issues).
 Feature request are also welcome.
 
 ## License

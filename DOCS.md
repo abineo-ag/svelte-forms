@@ -3,7 +3,7 @@
 Creating fields is simple. The only required argument is `name`. The name is used when returning errors or when retreiving form data. More on that later.
 
 ```ts
-import { field } from '@rokkett/svelte-forms';
+import { field } from '@abineo/svelte-forms';
 
 const myField = field('foo');
 ```
@@ -21,7 +21,7 @@ You can add validators to a field, mark it as optional or set a initial value.
 You can change the value of a field, or reset the field to the initial value (default is `null`).
 
 ```ts
-import { field, required, min } from '@rokkett/svelte-forms';
+import { field, required, min } from '@abineo/svelte-forms';
 import { get } from 'svelte/store';
 
 const myField = field(
@@ -183,7 +183,7 @@ console.log(get(f).data);
 Use the `fieldState` action to automatically set classes.
 
 ```ts
-import { field, fieldState } from '@rokkett/svelte-forms';
+import { field, fieldState } from '@abineo/svelte-forms';
 
 const foo = field('foo');
 ```

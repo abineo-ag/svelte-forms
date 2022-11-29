@@ -42,6 +42,8 @@ export function form<U extends Field<any>[]>(
 	};
 }
 
+// https://stackoverflow.com/questions/74617423/typescript-generic-indexed-access-type-of-rest-parameters
+
 /* interface Item<T> {
 	name: string;
 	value: T;

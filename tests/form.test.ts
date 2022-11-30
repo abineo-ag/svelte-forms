@@ -6,7 +6,6 @@ describe('form', () => {
 		const value = 'bar';
 		const foo = field('foo', [], { value });
 		const sut = form(foo);
-		// @ts-ignore
 		expect(get(sut).data.foo).toEqual(value);
 	});
 

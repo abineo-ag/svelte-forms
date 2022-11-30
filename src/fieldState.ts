@@ -1,12 +1,12 @@
 import type { Field } from './field';
 
-export function fieldState(
+export function fieldState<K extends string, V>(
 	node: Pick<HTMLElement, 'classList'>,
-	params: { field: Field<any>; dirty?: string; valid?: string; invalid?: string }
+	params: { field: Field<K, V>; dirty?: string; valid?: string; invalid?: string }
 ) {
 	let unsubscribe = () => {};
 	const update = (params: {
-		field: Field<any>;
+		field: Field<K, V>;
 		dirty?: string;
 		valid?: string;
 		invalid?: string;

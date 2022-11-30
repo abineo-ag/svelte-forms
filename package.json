@@ -1,6 +1,6 @@
 {
 	"name": "@abineo/svelte-forms",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "Form validation for svelte & sveltekit (js/ts)",
 	"author": "Christoph Schneider",
 	"license": "ISC",
@@ -19,6 +19,7 @@
 		"url": "https://gitlab.com/abineo/svelte-forms/-/issues"
 	},
 	"scripts": {
+		"prepublish": "tsc",
 		"build": "tsc",
 		"test": "jest",
 		"coverage": "jest --coverage"

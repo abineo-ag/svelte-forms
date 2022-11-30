@@ -119,7 +119,10 @@ export function eq(wanted: any, error: string = ValidationType.Equal): Validator
 	};
 }
 
-export function eqField(field: Field<any>, error: string = ValidationType.Equal): Validator {
+export function eqField<K extends string, V>(
+	field: Field<K, V>,
+	error: string = ValidationType.Equal
+): Validator {
 	return (value: any) => {
 		if (isEqual(get(field).value, value)) return ok(error);
 		return err(error);

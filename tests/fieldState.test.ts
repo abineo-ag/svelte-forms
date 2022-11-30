@@ -3,7 +3,7 @@ import { NodeMock } from './classListMock';
 
 describe('fieldState', () => {
 	let node: NodeMock;
-	let field: Field<string>;
+	let field: Field<string, string>;
 
 	beforeEach(() => {
 		node = new NodeMock();

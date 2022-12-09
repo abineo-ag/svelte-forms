@@ -1,6 +1,6 @@
 {
 	"name": "@abineo/svelte-forms",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"description": "Form validation for svelte & sveltekit (js/ts)",
 	"author": "Christoph Schneider",
 	"license": "ISC",

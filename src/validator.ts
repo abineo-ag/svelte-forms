@@ -21,7 +21,7 @@ class ValidationResult {
 	flat(): ValidationResult[] {
 		if (this.valid) return [this];
 
-		let inner = this.inner.map((r) => r.flat()).flat();
+		const inner = this.inner.map((r) => r.flat()).flat();
 		return [this, ...inner];
 	}
 }

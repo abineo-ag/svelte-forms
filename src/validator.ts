@@ -19,6 +19,8 @@ class ValidationResult {
 	}
 
 	flat(): ValidationResult[] {
+		if (this.valid) return [this];
+
 		let inner = this.inner.map((r) => r.flat()).flat();
 		return [this, ...inner];
 	}
@@ -177,8 +179,8 @@ export function none(...validators: Validator[]): Validator {
 export function either(validatorA: Validator, validatorB: Validator): Validator {
 	return (value: any) => {
 		const results = validateAll(value, validatorA, validatorB);
-		const count = results.map((result) => result.valid || []).flat();
-		return count.length === 1
+		const count = results.map((result) => result.valid || []).flat().length;
+		return count === 1
 			? ok(ValidationType.Either, results)
 			: err(ValidationType.Either, results);
 	};

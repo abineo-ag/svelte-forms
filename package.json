@@ -1,14 +1,14 @@
 {
 	"name": "@abineo/svelte-forms",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"description": "Form validation for svelte & sveltekit (js/ts)",
 	"author": "Christoph Schneider",
 	"license": "ISC",
 	"repository": {
 		"type": "git",
-		"url": "git+ssh://git@gitlab.com/abineo/svelte-forms.git"
+		"url": "git+ssh://git@github.com/abineo-ag/svelte-forms.git"
 	},
-	"homepage": "https://gitlab.com/abineo/svelte-forms/-/blob/main/README.md",
+	"homepage": "https://github.com/abineo-ag/svelte-forms/blob/main/README.md",
 	"keywords": [
 		"form",
 		"validation",
@@ -16,7 +16,7 @@
 		"sveltekit"
 	],
 	"bugs": {
-		"url": "https://gitlab.com/abineo/svelte-forms/-/issues"
+		"url": "https://github.com/abineo-ag/svelte-forms/issues"
 	},
 	"scripts": {
 		"prepublish": "tsc",

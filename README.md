@@ -1,15 +1,15 @@
 # Svelte Forms
 
-![Status](https://gitlab.com/abineo/svelte-forms/badges/main/pipeline.svg?ignore_skipped=true&key_text=tests&key_width=40)
-![Coverage](https://gitlab.com/abineo/svelte-forms/badges/main/coverage.svg)
-![Stable](https://img.shields.io/badge/status-stable-informational)
-![npm](https://img.shields.io/npm/v/@abineo/svelte-forms)
+[![📖 Documentation](https://img.shields.io/badge/📖-Documentation-gray)](https://github.com/abineo-ag/svelte-forms/blob/main/DOCS.md)
+[![📦 Repository](https://img.shields.io/badge/📦-Repository-gray)](https://github.com/abineo/svelte-forms)
+[![npm](https://img.shields.io/npm/v/@abineo/svelte-forms)](https://www.npmjs.com/package/@abineo/svelte-forms)
 
-Form validation for Svelte and Sveltekit. Support for Javascript and Typescript.
+<!-- ![Status](https://github.com/abineo/svelte-forms/badges/main/pipeline.svg?ignore_skipped=true&key_text=tests&key_width=40) -->
+<!-- ![Coverage](https://github.com/abineo/svelte-forms/badges/main/coverage.svg) -->
 
--   [Documentation](https://gitlab.com/abineo/svelte-forms/-/blob/main/DOCS.md)
--   [NPM](https://www.npmjs.com/package/@abineo/svelte-forms)
--   [GitLab](https://gitlab.com/abineo/svelte-forms)
+Well tested form validation for Svelte and Sveltekit. Support for Javascript and Typescript.
+
+#### [📖 Documentation](https://github.com/abineo-ag/svelte-forms/blob/main/DOCS.md) · [📖 Repository](https://github.com/abineo-ag/svelte-forms)
 
 ## Installation
 
@@ -36,22 +36,18 @@ function onSubmit() {
 
 ```html
 <form on:submit|preventDefault="{onSubmit}">
-	<input
-        bind:value={$mail.value}
-        name={$field.name}
-        use:fieldState={{ field: mail, invalid: 'border-red-500' }}
-    />
-    ...
+	<input bind:value={$mail.value} name={$field.name} use:fieldState={{ field: mail, invalid:
+	'border-red-500' }} /> ...
 	<button type="submit" disabled="{!$userForm.valid}">Submit</button>
 </form>
 ```
 
 ## Contributing
 
-If you think you found a bug: [open a issue](https://gitlab.com/abineo/svelte-forms/-/issues).
+If you think you found a bug: [open a issue](https://github.com/abineo-ag/svelte-forms/issues).
 Feature request are also welcome.
 
 ## License
 
-This library is distributed under the terms of the [ISC License](./LICENSE).  
+This library is distributed under the terms of the [ISC License](https://github.com/abineo-ag/svelte-forms/blob/main/LICENSE).  
 Find an easy explanation on [choosealicense.com/licenses/isc](https://choosealicense.com/licenses/isc/).

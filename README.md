@@ -6,7 +6,7 @@
 
 Well tested form validation for Svelte and Sveltekit. Support for Javascript and Typescript.
 
-#### [📖 Documentation](https://github.com/abineo-ag/svelte-forms/blob/main/DOCS.md) · [📦 Repository](https://github.com/abineo-ag/svelte-forms)
+<a style="font-size: 1.5em; font-weight: 600" href="https://github.com/abineo-ag/svelte-forms/blob/main/DOCS.md">📖 Documentation</a>
 
 ## Installation
 

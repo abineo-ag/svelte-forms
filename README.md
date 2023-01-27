@@ -4,7 +4,7 @@
 [![📦 Repository](https://img.shields.io/badge/-📦%20Repository-informational)](https://github.com/abineo-ag/svelte-forms)
 [![npm](https://img.shields.io/npm/v/@abineo/svelte-forms)](https://www.npmjs.com/package/@abineo/svelte-forms)
 [![CI](https://github.com/abineo-ag/svelte-forms/actions/workflows/ci.yml/badge.svg)](https://github.com/abineo-ag/svelte-forms/actions/workflows/ci.yml)
-[![Coverage](https://img.shields.io/badge/Coverage-94.68%-success)](https://github.com/abineo-ag/svelte-forms/actions/workflows/coverage.yml)
+[![Coverage](https://img.shields.io/badge/Coverage-94.68%25-success)](https://github.com/abineo-ag/svelte-forms/actions/workflows/coverage.yml)
 
 Well tested form validation for Svelte and Sveltekit. Support for Javascript and Typescript.
 

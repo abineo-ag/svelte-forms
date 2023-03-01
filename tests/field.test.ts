@@ -50,11 +50,19 @@ describe('field', () => {
 	});
 
 	it('gets marked as not dirty on reset', () => {
-		const sut = field('sut', [], { value: '' });
+		const sut = field('sut', [], { value: 'alice' });
 		sut.set('bob');
 		sut.reset();
 
 		expect(get(sut).dirty).toEqual(false);
+		expect(get(sut).value).toEqual('alice');
+	});
+
+	it('can have new initial value on reset', () => {
+		const sut = field('sut', [], { value: 'alice' });
+		sut.reset('bob');
+
+		expect(get(sut).value).toEqual('bob');
 	});
 
 	it('is validated on init', () => {
@@ -103,17 +111,5 @@ describe('field', () => {
 
 		expect(get(sut).valid).toEqual(true);
 		expect(get(sut).errors).toStrictEqual([error]);
-	});
-
-	it('can accept new state on set', () => {
-		const sut = field('sut');
-		const value = 'blue';
-		const name = 'bob';
-		const dirty = false;
-		sut.set({ name, value }, dirty);
-
-		expect(get(sut).name).toEqual(name);
-		expect(get(sut).value).toEqual(value);
-		expect(get(sut).dirty).toEqual(dirty);
 	});
 });

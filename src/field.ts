@@ -4,28 +4,17 @@ import { getErrors, validateAll, type Validator } from './validator';
 export interface FieldState<K extends string, V> {
 	name: K;
 	value: V;
+	initialValue: V;
 	valid: boolean;
 	dirty: boolean;
 	errors: string[];
 }
 
-function isFieldState<K extends string, V>(value: FieldState<K, V> | V): value is FieldState<K, V> {
-	return (
-		!!value &&
-		typeof value === 'object' &&
-		'name' in value &&
-		'value' in value &&
-		'valid' in value &&
-		'dirty' in value &&
-		'errors' in value
-	);
-}
-
 export type Field<K extends string, V> = Omit<Writable<FieldState<K, V>>, 'set' | 'update'> & {
 	update(this: void, updater: Updater<FieldState<K, V>>, dirty?: boolean): void;
-	set(this: void, value: FieldState<K, V> | V, dirty?: boolean): void;
+	set(this: void, value: V, dirty?: boolean): void;
 	setValid(valid: boolean, dirty?: boolean): void;
-	reset: () => void;
+	reset: (newValue?: V) => void;
 	revalidate: (dirty?: boolean) => void;
 };
 
@@ -60,7 +49,11 @@ export function field<K extends string, V>(
 ): Field<K, V> {
 	const opts: FieldOptions<V> = { ...defaultFieldOptions, ...options };
 	const store = writable(
-		getNewState({ name, value: opts.value, dirty: false }, validators, opts)
+		getNewState(
+			{ name, value: opts.value, initialValue: opts.value, dirty: false },
+			validators,
+			opts
+		)
 	);
 
 	return {
@@ -71,20 +64,23 @@ export function field<K extends string, V>(
 				return getNewState({ ...state, dirty }, validators, opts);
 			});
 		},
-		set: (state: FieldState<K, V> | V, dirty: boolean = true) => {
-			if (isFieldState(state)) {
-				store.set(getNewState({ ...state, dirty }, validators, opts));
-			} else {
-				store.set(getNewState({ ...get(store), value: <V>state, dirty }, validators, opts));
-			}
+		set: (value: V, dirty: boolean = true) => {
+			store.set(getNewState({ ...get(store), value, dirty }, validators, opts));
 		},
 		setValid: (valid: boolean, dirty?: boolean) => {
 			const state = get(store);
 			store.set({ ...state, valid, dirty: dirty || state.dirty });
 		},
-		reset: () => {
+		reset: (newValue?: V) => {
+			const state = get(store);
+			let initialValue = state.initialValue;
+			if (newValue !== undefined) initialValue = newValue;
 			store.set(
-				getNewState({ ...get(store), value: opts.value, dirty: false }, validators, opts)
+				getNewState(
+					{ ...state, value: initialValue, initialValue, dirty: false },
+					validators,
+					opts
+				)
 			);
 		},
 		revalidate: (dirty?: boolean) => {

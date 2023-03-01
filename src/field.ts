@@ -10,7 +10,15 @@ export interface FieldState<K extends string, V> {
 }
 
 function isFieldState<K extends string, V>(value: FieldState<K, V> | V): value is FieldState<K, V> {
-	return typeof (<FieldState<K, V>>value).name === 'string';
+	return (
+		!!value &&
+		typeof value === 'object' &&
+		'name' in value &&
+		'value' in value &&
+		'valid' in value &&
+		'dirty' in value &&
+		'errors' in value
+	);
 }
 
 export type Field<K extends string, V> = Omit<Writable<FieldState<K, V>>, 'set' | 'update'> & {

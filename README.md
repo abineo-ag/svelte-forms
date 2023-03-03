@@ -31,7 +31,7 @@ function onSubmit() {
 }
 ```
 
-```html
+```svelte
 <form on:submit|preventDefault="{onSubmit}">
 	<input bind:value={$mail.value} name={$field.name} use:fieldState={{ field: mail, invalid:
 	'border-red-500' }} /> ...

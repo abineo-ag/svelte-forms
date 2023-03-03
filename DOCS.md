@@ -10,10 +10,10 @@ const myField = field('foo');
 
 Fields are [Svelte Stores](https://svelte.dev/docs#run-time-svelte-store) which you can subscribe to.
 
-```html
+```svelte
 <input bind:value="{$myField.value}" name="{$myField.name}" />
 {#if !$myField.valid && $myField.dirty}
-<sub>{$myField.errors.join()}</sub>
+	<sub>{$myField.errors.join()}</sub>
 {/if}
 ```
 
@@ -174,7 +174,7 @@ console.log(get(f).data);
 // { email: 'foo@bar.baz', pass: 'password1!' }
 ```
 
-```html
+```svelte
 <button disabled="{!$f.valid}" type="submit">Login</button>
 ```
 
@@ -188,7 +188,7 @@ import { field, fieldState } from '@abineo/svelte-forms';
 const foo = field('foo');
 ```
 
-```html
+```svelte
 <input use:fieldState="{{ field: foo, invalid: 'border-red' }}" />
 ```
 

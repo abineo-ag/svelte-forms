@@ -11,21 +11,54 @@ export interface FieldState<K extends string, V> {
 }
 
 export type Field<K extends string, V> = Omit<Writable<FieldState<K, V>>, 'set' | 'update'> & {
+	/**
+	 * Update value using callback and inform subscribers.
+	 * @param updater callback
+	 * @param dirty defaults to `true`
+	 */
 	update(this: void, updater: Updater<FieldState<K, V>>, dirty?: boolean): void;
-	set(this: void, value: V, dirty?: boolean): void;
-	setValid(valid: boolean, dirty?: boolean): void;
+
+	/**
+	 * Set value and inform subscribers.
+	 * @param value to set
+	 * @param dirty defaults to `true`
+	 */
+	set(this: void, state: FieldState<K, V>, dirty?: boolean): void;
+
+	/**
+	 * Set value and inform subscribers.
+	 * @param value to set
+	 * @param dirty defaults to `true`
+	 */
+	setValue(value: V, dirty?: boolean): void;
+
+	/**
+	 * Update the initial value, which will get used when the fields resets.
+	 * @param initialValue to set
+	 */
+	setInitialValue(initialValue: V): void;
+
+	setValid(valid: boolean): void;
+	setDirty(dirty: boolean): void;
+	revalidate: () => void;
+
+	/**
+	 * Sets `dirty` to `false` and `value` to the initial value or the value provided in `newValue`
+	 * @param initialValue to set
+	 */
 	reset: (newValue?: V) => void;
-	revalidate: (dirty?: boolean) => void;
 };
 
 export interface FieldOptions<V> {
 	value: V;
 	optional: boolean;
+	dirty: boolean;
 }
 
 const defaultFieldOptions = {
 	value: null,
 	optional: false,
+	dirty: false,
 };
 
 function getNewState<K extends string, V>(
@@ -50,7 +83,7 @@ export function field<K extends string, V>(
 	const opts: FieldOptions<V> = { ...defaultFieldOptions, ...options };
 	const store = writable(
 		getNewState(
-			{ name, value: opts.value, initialValue: opts.value, dirty: false },
+			{ name, value: opts.value, initialValue: opts.value, dirty: opts.dirty },
 			validators,
 			opts
 		)
@@ -64,12 +97,22 @@ export function field<K extends string, V>(
 				return getNewState({ ...state, dirty }, validators, opts);
 			});
 		},
-		set: (value: V, dirty: boolean = true) => {
+		set: (state: FieldState<K, V>, dirty: boolean = true) => {
+			store.set(getNewState({ ...state, dirty }, validators, opts));
+		},
+		setValue: (value: V, dirty: boolean = true) => {
 			store.set(getNewState({ ...get(store), value, dirty }, validators, opts));
 		},
-		setValid: (valid: boolean, dirty?: boolean) => {
+		setInitialValue: (initialValue: V) => {
+			store.set(getNewState({ ...get(store), initialValue }, validators, opts));
+		},
+		setValid: (valid: boolean) => {
 			const state = get(store);
-			store.set({ ...state, valid, dirty: dirty || state.dirty });
+			store.set({ ...state, valid });
+		},
+		setDirty: (dirty: boolean) => {
+			const state = get(store);
+			store.set({ ...state, dirty });
 		},
 		reset: (newValue?: V) => {
 			const state = get(store);
@@ -83,9 +126,9 @@ export function field<K extends string, V>(
 				)
 			);
 		},
-		revalidate: (dirty?: boolean) => {
+		revalidate: () => {
 			const state = get(store);
-			store.set(getNewState({ ...state, dirty: dirty || state.dirty }, validators, opts));
+			store.set(getNewState({ ...state }, validators, opts));
 		},
 	};
 }

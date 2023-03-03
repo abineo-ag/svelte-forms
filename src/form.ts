@@ -19,7 +19,7 @@ export function form<T extends Field<any, any>[]>(
 	...fields: T
 ): Readable<Form<T>> & {
 	reset: () => void;
-	revalidate: (dirty?: boolean) => void;
+	revalidate: () => void;
 } {
 	const store = derived(fields, ([_]) => {
 		const _fields = fields.map((field) => get(field));
@@ -37,8 +37,8 @@ export function form<T extends Field<any, any>[]>(
 		reset: () => {
 			fields.forEach((field) => field.reset());
 		},
-		revalidate: (dirty?: boolean) => {
-			fields.forEach((field) => field.revalidate(dirty));
+		revalidate: () => {
+			fields.forEach((field) => field.revalidate());
 		},
 	};
 }

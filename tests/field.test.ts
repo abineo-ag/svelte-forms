@@ -44,14 +44,14 @@ describe('field', () => {
 
 	it('gets marked as dirty on set', () => {
 		const sut = field('sut', [], { value: '' });
-		sut.set('bob');
+		sut.setValue('bob');
 
 		expect(get(sut).dirty).toEqual(true);
 	});
 
 	it('gets marked as not dirty on reset', () => {
 		const sut = field('sut', [], { value: 'alice' });
-		sut.set('bob');
+		sut.setValue('bob');
 		sut.reset();
 
 		expect(get(sut).dirty).toEqual(false);

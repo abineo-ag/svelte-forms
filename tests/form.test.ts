@@ -23,7 +23,7 @@ describe('form', () => {
 
 		expect(get(sut).valid).toEqual(false);
 
-		invalid.set('foo');
+		invalid.setValue('foo');
 
 		expect(get(sut).valid).toEqual(true);
 
@@ -38,7 +38,7 @@ describe('form', () => {
 
 		expect(get(sut).dirty).toEqual(false);
 
-		foo.set('foo');
+		foo.setValue('foo');
 
 		expect(get(sut).dirty).toEqual(true);
 

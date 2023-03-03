@@ -20,7 +20,7 @@ describe('fieldState', () => {
 		expect(node.classList.contains(invalid)).toEqual(false);
 		expect(node.classList.contains(dirty)).toEqual(false);
 
-		field.set('x');
+		field.setValue('x');
 
 		expect(node.classList.contains(valid)).toEqual(false);
 		expect(node.classList.contains(invalid)).toEqual(true);
@@ -39,7 +39,7 @@ describe('fieldState', () => {
 		expect(node.classList.contains(invalid)).toEqual(false);
 		expect(node.classList.contains(dirty)).toEqual(false);
 
-		field.set('x');
+		field.setValue('x');
 
 		expect(node.classList.contains(valid)).toEqual(false);
 		expect(node.classList.contains(invalid)).toEqual(true);

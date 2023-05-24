@@ -1,5 +1,3 @@
-import { Set } from 'typescript';
-
 class ClassListMock implements DOMTokenList {
 	[index: number]: string;
 	length: number;

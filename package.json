@@ -1,6 +1,6 @@
 {
 	"name": "@abineo/svelte-forms",
-	"version": "3.0.1",
+	"version": "3.0.2",
 	"description": "Well tested form validation for svelte & sveltekit (js/ts)",
 	"license": "ISC",
 	"repository": {
